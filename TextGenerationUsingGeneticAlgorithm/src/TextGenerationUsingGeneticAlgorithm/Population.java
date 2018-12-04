@@ -38,7 +38,7 @@ public class Population<X extends Comparable<Chromosome>> {
         this.populationSize = populationSize;
         this.target = target;
         this.mutationRate = mutationRate;
-        createPopulation();
+        createPopulation(generation);
     }
 
     public void createPopulation(ArrayList<Chromosome> generation) {
@@ -48,12 +48,7 @@ public class Population<X extends Comparable<Chromosome>> {
         Collections.sort(generation);
     }
 
-    public void createPopulation() {
-        while (!(generation.size() == populationSize)) {
-            generation.add(new Chromosome(target));
-        }
-        Collections.sort(generation);
-    }
+    
 
     public void NaturalSelection() {
         generationCount++;
@@ -73,8 +68,9 @@ public class Population<X extends Comparable<Chromosome>> {
             Chromosome child = crossover(partnerA, partnerB, target);
             mutate(child, mutationRate);
             generation.set(generation.size() - (j + 1), child);
-
+            
         }
+        evaluate(generation);
     }
 
     public Chromosome crossover(Chromosome partnerA, Chromosome partnerB, String target) {
@@ -111,7 +107,7 @@ public class Population<X extends Comparable<Chromosome>> {
         child.setCandidateString(String.valueOf(childChars));
     }
 
-    public void evaluate() {
+    public double evaluate(ArrayList<Chromosome> generation) {
         double worldrecord = 0.0;
         int index = 0;
         for (int i = 0; i < generation.size(); i++) {
@@ -126,6 +122,7 @@ public class Population<X extends Comparable<Chromosome>> {
         }
         best = new Chromosome(target);
         best.setCandidateString(generation.get(index).getCandidateString());
+    return worldrecord;
     }
 
     public boolean isFinished() {

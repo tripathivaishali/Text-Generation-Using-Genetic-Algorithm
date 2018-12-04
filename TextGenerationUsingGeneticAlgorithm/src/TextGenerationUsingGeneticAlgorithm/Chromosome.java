@@ -18,7 +18,7 @@ import java.util.Random;
 public class Chromosome implements Comparable<Chromosome> {
 
     private String candidateString;
-    private Double fitness;
+    private Double fitness=0.01;
     private int chromozomeLength;
     private String target;
     private Gene gene;
