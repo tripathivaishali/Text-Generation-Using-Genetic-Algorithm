@@ -52,10 +52,6 @@ public class Population<X extends Comparable<Chromosome>> {
             generation.add(new Chromosome(target));
         }
         Collections.sort(generation);
-        
-//        for (int i = 0; i < generation.size(); i++) {
-//            System.out.println("sorted:" + generation.get(i).getFitness());
-//        }
     }
 
     /*  @Override
@@ -63,6 +59,7 @@ public class Population<X extends Comparable<Chromosome>> {
         return c;
     }*/
     public void NaturalSelection() {
+        generationCount++;
         matingPool.clear();
         for (int i = 0; i < generation.size() * 0.8; i++) {
             matingPool.add(generation.get(i));
@@ -127,7 +124,6 @@ public class Population<X extends Comparable<Chromosome>> {
                 worldrecord = generation.get(i).getFitness();
             }
         }
-
         if (worldrecord == perfectScore) {
             finished = true;
         }
