@@ -16,7 +16,7 @@ public class Gene {
     Random r = new Random();
    
     public char generateGene(){
-        char[] punctuations = new char []{',', '.','!','-','{','}','&','*',';'};
+        char[] punctuations = new char []{',', '.','!','-','{','}','&','*',';',':'};
         char[] numbers = new char[]{'1','2','3','4','5','6','7','8','9','0'};
         char[] space = new char[]{' '};
         
