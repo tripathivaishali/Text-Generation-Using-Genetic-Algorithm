@@ -16,8 +16,8 @@ public class TextGenerationUsingGeneticAlgorithm {
      */
     public static void main(String[] args) {
         int populationSize = 10000;
-        float mutationRate = (float) 10;
-        String target = "to be or not to be";
+        float mutationRate =  (float) 0.01;
+        String target = "To be or not to be, that is the question.";
         
         Population c = new Population(populationSize,target, mutationRate);
         while (!(c.isFinished())) {

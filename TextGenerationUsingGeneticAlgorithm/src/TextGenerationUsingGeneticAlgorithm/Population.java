@@ -72,12 +72,14 @@ public class Population<X extends Comparable<Chromosome>> {
             int a = (r.nextInt(matingPool.size()));
             int b = (r.nextInt(matingPool.size()));
             Chromosome partnerA = matingPool.get(a);
+            //System.out.println("Partner A: "+partnerA.getCandidateString());
             Chromosome partnerB = matingPool.get(b);
-            Chromosome child = new Chromosome(target);
-            child = crossover(partnerA, partnerB, target);
+            //System.out.println("Partner B: "+partnerB.getCandidateString());
+            
+            Chromosome child = crossover(partnerA, partnerB, target);
             mutate(child, mutationRate);
-
             generation.set(generation.size() - (j + 1), child);
+            
         }
     }
 
@@ -95,6 +97,7 @@ public class Population<X extends Comparable<Chromosome>> {
         }
         String str = String.valueOf(str1);
         child.setCandidateString(str);
+        child.setFitness(child.calculateFitness(str));
         return child;
     }
 

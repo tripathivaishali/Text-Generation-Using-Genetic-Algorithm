@@ -24,7 +24,10 @@ public class Gene {
             if(r.nextBoolean())
                return (char)(r.nextInt(26) + 'a');
             else
+                if (r.nextBoolean())
                 return punctuations[r.nextInt(punctuations.length)];
+                else 
+                return (char) (r.nextInt(26) + 'A');
         else 
             if(r.nextBoolean())
                 return numbers[r.nextInt(numbers.length)];
