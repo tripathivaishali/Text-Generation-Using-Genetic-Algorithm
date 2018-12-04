@@ -16,8 +16,28 @@ public class UserInterface extends javax.swing.JFrame {
     /**
      * Creates new form UserInterface
      */
+      String best;
     public UserInterface() {
         initComponents();
+        this.setVisible(true);
+        int populationSize = 10000;
+        float mutationRate =  (float) 0.01;
+        String target = "Program Structures and Algorithms is the best class!!";
+        
+        Population c = new Population(populationSize,target, mutationRate);
+        while (!(c.isFinished())) {
+            
+            c.NaturalSelection();
+            c.evaluate();
+             best=c.getBest();
+             targetString.setText(best);
+           // System.out.println(c.getBest());
+            
+        }  
+            System.out.println("Number of generations: "+c.getGenerations());
+            System.out.println("Average fitness of the generation: "+c.getAverageFitness());
+            
+       
     }
 
     /**
@@ -30,28 +50,29 @@ public class UserInterface extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        targetString = new java.awt.TextField();
+        textField2 = new java.awt.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Target String");
 
-        jLabel2.setText("jLabel2");
-
         jLabel3.setText("Generated String");
 
-        jLabel4.setText("jLabel4");
+        targetString.setText("textField1");
+        targetString.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                targetStringActionPerformed(evt);
+            }
+        });
+
+        textField2.setText("textField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(166, 166, 166))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -59,27 +80,35 @@ public class UserInterface extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(174, 174, 174)
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))))
-                .addContainerGap(107, Short.MAX_VALUE))
+                            .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(targetString, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(targetString, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
                 .addComponent(jLabel3)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel4)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void targetStringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_targetStringActionPerformed
+        // TODO add your handling code here:
+     
+    }//GEN-LAST:event_targetStringActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,32 +141,36 @@ public class UserInterface extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UserInterface().setVisible(true);
+               
             }
         });
+      
         
-        
-        int populationSize = 10000;
-        float mutationRate =  (float) 0.01;
-        String target = "Program Structures and Algorithms is the best class!!";
-        
-        Population c = new Population(populationSize,target, mutationRate);
-        while (!(c.isFinished())) {
-            
-            c.NaturalSelection();
-            c.evaluate();
-            System.out.println(c.getBest());
-            
-        }  
-            System.out.println("Number of generations: "+c.getGenerations());
-            System.out.println("Average fitness of the generation: "+c.getAverageFitness());
-            
-        
+      
+//        int populationSize = 10000;
+//        float mutationRate =  (float) 0.01;
+//        String target = "Program Structures and Algorithms is the best class!!";
+//        
+//        Population c = new Population(populationSize,target, mutationRate);
+//        while (!(c.isFinished())) {
+//            
+//            c.NaturalSelection();
+//            c.evaluate();
+//             c.getBest();
+//            
+//            System.out.println(c.getBest());
+//            
+//        }  
+//            System.out.println("Number of generations: "+c.getGenerations());
+//            System.out.println("Average fitness of the generation: "+c.getAverageFitness());
+//            
+//        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private java.awt.TextField targetString;
+    private java.awt.TextField textField2;
     // End of variables declaration//GEN-END:variables
 }
