@@ -24,6 +24,10 @@ public class Chromosome implements Comparable<Chromosome> {
     private Gene gene;
     Random r = new Random();
 
+    public Chromosome() {
+
+    }
+
     public Chromosome(String target) {
 
         this.target = target;
@@ -32,10 +36,16 @@ public class Chromosome implements Comparable<Chromosome> {
 
     }
 
-    public void generateChromosome(int chromozomeLength) {
-        int minRange = 0;
+    public int range() {
+        int minRange = 1;
         int maxRange = chromozomeLength;
-        String str = generateRandomWord(r.nextInt(maxRange - minRange));
+        return (r.nextInt((maxRange - minRange) + 1) + minRange);
+    }
+
+    public void generateChromosome(int chromozomeLength) {
+        int minRange = 1;
+        int maxRange = chromozomeLength;
+        String str = generateRandomWord(range());
         while (!(str.length() == maxRange)) {
             str = str + " " + generateRandomWord(r.nextInt(maxRange - str.length()));
         }
@@ -43,6 +53,7 @@ public class Chromosome implements Comparable<Chromosome> {
         setCandidateString(candidateString);
         setFitness(calculateFitness(candidateString));
     }
+
     public String generateRandomWord(int wordSize) {
         char[] randomChars = new char[wordSize];
         for (int i = 0; i < wordSize; i++) {
@@ -51,6 +62,7 @@ public class Chromosome implements Comparable<Chromosome> {
         String randomWord = String.valueOf(randomChars);
         return randomWord;
     }
+
     public double calculateFitness(String candidateString) {
         double score = 0;
         for (int i = 0; i < candidateString.length(); i++) {
@@ -61,12 +73,15 @@ public class Chromosome implements Comparable<Chromosome> {
         fitness = (score / target.length()) + 0.01;
         return fitness;
     }
+
     public String getCandidateString() {
         return candidateString;
     }
+
     public void setCandidateString(String candidateString) {
         this.candidateString = candidateString;
     }
+
     public double getFitness() {
         return fitness;
     }
@@ -74,9 +89,11 @@ public class Chromosome implements Comparable<Chromosome> {
     public void setFitness(double fitness) {
         this.fitness = fitness;
     }
+
     public Gene getGene() {
         return gene;
     }
+
     public void setGene(Gene gene) {
         this.gene = gene;
     }
@@ -85,6 +102,7 @@ public class Chromosome implements Comparable<Chromosome> {
     public String toString() {
         return candidateString;
     }
+
     @Override
     public int compareTo(Chromosome c) {
         return c.fitness.compareTo(this.fitness);

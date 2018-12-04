@@ -212,15 +212,14 @@ public class UserInterface extends javax.swing.JFrame {
             numOfGenTxt.setText(String.valueOf(c.getGenerations()));
             avgFitnessTxt.setText(String.valueOf(c.getAverageFitness()));
             double t = time2 - time1;
-            timeTxt.setText(String.valueOf(t)+"ms");
+            timeTxt.setText(String.valueOf(t) + "ms");
             System.out.println("Time Elapsed: " + t + " ms");
         } catch (NumberFormatException n) {
             if ((targetStringTxt.getText().equals("")) || mutationRateTxt.getText().equals("")) {
-                JOptionPane.showMessageDialog(rootPane, "Target String and mutation rate cannot be empty.");}
-            else if ((targetStringTxt.getText().length()==1)) {
+                JOptionPane.showMessageDialog(rootPane, "Target String and mutation rate cannot be empty.");
+            } else if ((targetStringTxt.getText().length() == 1)) {
                 JOptionPane.showMessageDialog(rootPane, "Please enter a string larger than 1 character.");
-            }
-                    else {
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Mutation should be a float value.");
             }
         }

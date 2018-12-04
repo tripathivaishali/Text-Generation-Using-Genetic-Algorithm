@@ -24,13 +24,15 @@ public class Population<X extends Comparable<Chromosome>> {
     private int populationSize;
     private String target;
     private float mutationRate;
-    private Chromosome c;
     Random r = new Random();
     private int generationCount = 0;
     private double perfectScore = 1.01;
     private boolean finished = false;
     private Chromosome best;
     private Gene gene;
+
+    public Population() {
+    }
 
     public Population(int populationSize, String target, float mutationRate) {
         this.populationSize = populationSize;
@@ -39,12 +41,11 @@ public class Population<X extends Comparable<Chromosome>> {
         createPopulation();
     }
 
-    public Chromosome getC() {
-        return c;
-    }
-
-    public void setC(Chromosome c) {
-        this.c = c;
+    public void createPopulation(ArrayList<Chromosome> generation) {
+        while (!(generation.size() == populationSize)) {
+            generation.add(new Chromosome(target));
+        }
+        Collections.sort(generation);
     }
 
     public void createPopulation() {
@@ -54,10 +55,6 @@ public class Population<X extends Comparable<Chromosome>> {
         Collections.sort(generation);
     }
 
-    /*  @Override
-    public String toString() {
-        return c;
-    }*/
     public void NaturalSelection() {
         generationCount++;
         matingPool.clear();
@@ -72,11 +69,11 @@ public class Population<X extends Comparable<Chromosome>> {
             //System.out.println("Partner A: "+partnerA.getCandidateString());
             Chromosome partnerB = matingPool.get(b);
             //System.out.println("Partner B: "+partnerB.getCandidateString());
-            
+
             Chromosome child = crossover(partnerA, partnerB, target);
             mutate(child, mutationRate);
             generation.set(generation.size() - (j + 1), child);
-            
+
         }
     }
 
@@ -138,8 +135,8 @@ public class Population<X extends Comparable<Chromosome>> {
     public int getGenerations() {
         return generationCount;
     }
-    
-    public String getBest(){
+
+    public String getBest() {
         return best.getCandidateString();
     }
 
