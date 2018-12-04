@@ -5,6 +5,7 @@
  */
 package greetingcardgenerator;
 
+import TextGenerationUsingGeneticAlgorithm.Gene;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

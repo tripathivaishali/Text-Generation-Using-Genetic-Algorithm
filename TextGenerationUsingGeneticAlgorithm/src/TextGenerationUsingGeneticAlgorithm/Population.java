@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greetingcardgenerator;
+package TextGenerationUsingGeneticAlgorithm;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,6 +30,7 @@ public class Population<X extends Comparable<Chromosome>> {
     private double perfectScore = 1.01;
     private boolean finished = false;
     private Chromosome best;
+    private Gene gene;
 
     public Population(int populationSize, String target, float mutationRate) {
         this.populationSize = populationSize;
@@ -51,10 +52,10 @@ public class Population<X extends Comparable<Chromosome>> {
             generation.add(new Chromosome(target));
         }
         Collections.sort(generation);
+        
 //        for (int i = 0; i < generation.size(); i++) {
 //            System.out.println("sorted:" + generation.get(i).getFitness());
 //        }
-        NaturalSelection();
     }
 
     /*  @Override
@@ -66,30 +67,17 @@ public class Population<X extends Comparable<Chromosome>> {
         for (int i = 0; i < generation.size() * 0.8; i++) {
             matingPool.add(generation.get(i));
         }
+        Collections.sort(generation);
         for (int j = 0; j < generation.size() * 0.2; j++) {
             int a = (r.nextInt(matingPool.size()));
             int b = (r.nextInt(matingPool.size()));
             Chromosome partnerA = matingPool.get(a);
             Chromosome partnerB = matingPool.get(b);
-            Chromosome child = crossover(partnerA, partnerB, target);
+            Chromosome child = new Chromosome(target);
+            child = crossover(partnerA, partnerB, target);
             mutate(child, mutationRate);
-            //   generation.remove(generation.size()-(j + 1));
 
-           generation.set(generation.size() - (j + 1), child);
-        }
-//        System.out.println("Size of Generation: "+generation.size());
-
-       evaluate();
-
-        while (!isFinished()) {
-            generationCount++;
-// System.out.println("generation"+generationCount);
-            if (!(generationCount % 2 == 0)) {
-
-            } else {
-                Collections.sort(generation);
-            }
-            NaturalSelection();
+            generation.set(generation.size() - (j + 1), child);
         }
     }
 
@@ -119,14 +107,14 @@ public class Population<X extends Comparable<Chromosome>> {
         for (int i = 0; i < childChars.length; i++) {
             createdRanNum = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
             if (createdRanNum < mutationRate) {
-                childChars[i] = (char) (r.nextInt(26) + 'a');
+                gene = new Gene();
+                childChars[i] = (char) gene.generateGene();
             }
         }
         child.setCandidateString(String.valueOf(childChars));
     }
 
     public void evaluate() {
-//        System.out.println("Entered evaluate");
         double worldrecord = 0.0;
         int index = 0;
         for (int i = 0; i < generation.size(); i++) {
@@ -140,13 +128,8 @@ public class Population<X extends Comparable<Chromosome>> {
         if (worldrecord == perfectScore) {
             finished = true;
         }
-//        System.out.println("Index: "+index);
-//        System.out.println("Generation at index: "+generation.get(index).getCandidateString());
         best = new Chromosome(target);
         best.setCandidateString(generation.get(index).getCandidateString());
-        System.out.println("in -"+index);
-        System.out.println(generation.get(index).getCandidateString());
-
     }
 
     public boolean isFinished() {
@@ -155,6 +138,10 @@ public class Population<X extends Comparable<Chromosome>> {
 
     public int getGenerations() {
         return generationCount;
+    }
+    
+    public String getBest(){
+        return best.getCandidateString();
     }
 
     public double getAverageFitness() {
