@@ -1,4 +1,4 @@
-# Text-Search-Using-Genetic-Algorithm
+# Text Search Using Genetic Algorithm
 
 ## What is Genetic Algorithm?
 The term “Genetic Algorithm” refers to a specific algorithm implemented in a specific way to solve specific sorts of problems. [Daniel Shiffman, Nature of Code – Chapter 9]
