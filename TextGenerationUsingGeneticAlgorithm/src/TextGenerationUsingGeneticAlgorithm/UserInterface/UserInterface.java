@@ -52,7 +52,7 @@ public class UserInterface extends javax.swing.JFrame {
         avgFitnessTxt = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        Donetxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -143,7 +143,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
         getContentPane().add(generatedStringTxt);
-        generatedStringTxt.setBounds(20, 230, 640, 40);
+        generatedStringTxt.setBounds(20, 240, 640, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
         jLabel8.setText("Time Elapsed:");
@@ -168,10 +168,13 @@ public class UserInterface extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(20, 390, 190, 20);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TextGenerationUsingGeneticAlgorithm/UserInterface/NEWIMAGE123.png"))); // NOI18N
-        jLabel7.setText("jLabel7");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(0, 0, 700, 700);
+        Donetxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DonetxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Donetxt);
+        Donetxt.setBounds(280, 500, 140, 26);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -230,6 +233,7 @@ public class UserInterface extends javax.swing.JFrame {
             avgFitnessTxt.setText(String.valueOf(c.getAverageFitness()));
             double t = time2 - time1;
             timeTxt.setText(String.valueOf(t) + "ms");
+            Donetxt.setText("Done!!!");
             System.out.println("Time Elapsed: " + t + " ms");
         } catch (NumberFormatException n) {
             if ((targetStringTxt.getText().equals("")) || mutationRateTxt.getText().equals("")) {
@@ -265,6 +269,10 @@ public class UserInterface extends javax.swing.JFrame {
     private void generatedStringTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatedStringTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_generatedStringTxtActionPerformed
+
+    private void DonetxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DonetxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DonetxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,6 +312,7 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Donetxt;
     private javax.swing.JTextField avgFitnessTxt;
     private java.awt.TextField generatedStringTxt;
     private javax.swing.JLabel jLabel1;
@@ -313,7 +322,6 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField mutationRateTxt;
     private javax.swing.JTextField numOfGenTxt;
