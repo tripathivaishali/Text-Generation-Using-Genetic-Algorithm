@@ -136,6 +136,11 @@ public class UserInterface extends javax.swing.JFrame {
 
         generatedStringTxt.setEnabled(false);
         generatedStringTxt.setFont(new java.awt.Font("Segoe UI Light", 3, 16)); // NOI18N
+        generatedStringTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                generatedStringTxtActionPerformed(evt);
+            }
+        });
         getContentPane().add(generatedStringTxt);
         generatedStringTxt.setBounds(20, 240, 640, 30);
 
@@ -188,6 +193,9 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBtnActionPerformed
         // TODO add your handling code here:
+        avgFitnessTxt.setText("");
+        numOfGenTxt.setText("");
+        timeTxt.setText("");
         try {
 //        if((targetStringTxt.getText()=="") || mutationRateTxt.getText()==""){
 //            JOptionPane.showMessageDialog(rootPane, "Target String and mutation rate cannot be empty.");
@@ -203,13 +211,15 @@ public class UserInterface extends javax.swing.JFrame {
 
             Population c = new Population(populationSize, target, mutationRate);
             double time1 = System.currentTimeMillis();
-            while (!(c.isFinished())) {
+            int stopper = 0;
+            while (!(c.isFinished()) && (stopper<10000)) {
 
                 c.NaturalSelection();
               //  c.evaluate();
                 best = c.getBest();
                 generatedStringTxt.setText(c.getBest());
                 System.out.println(c.getBest());
+                stopper++;
 
             }
             double time2 = System.currentTimeMillis();
@@ -249,6 +259,10 @@ public class UserInterface extends javax.swing.JFrame {
     private void avgFitnessTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avgFitnessTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_avgFitnessTxtActionPerformed
+
+    private void generatedStringTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatedStringTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_generatedStringTxtActionPerformed
 
     /**
      * @param args the command line arguments
