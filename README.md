@@ -23,7 +23,8 @@ which equals a 1 in 50,857,702,033,867,822,607,895,549,241,096,482,953,017,615,8
 Now, the chances are, if this system has capability of generating one million phrase per second, for the system to have a 99% probability to get the string right, it will have to work for 9,719,096,182,010,563,073,125,591,133,903,305,625,605,017 years.
 However, using Genetic Algorithm to do this would hardly take few seconds! And that’s exactly what we are here to demonstrate!
 
-# The demo of this project is available at https://youtu.be/oH2PLkd36lc
+# The demo of this project is available at 
+https://youtu.be/oH2PLkd36lc
 
 # Output Explained
 The application accepts any string of user’s choice and applies Genetic Algorithm to generate the same string as an output based on the mutation rate entered by the user.
