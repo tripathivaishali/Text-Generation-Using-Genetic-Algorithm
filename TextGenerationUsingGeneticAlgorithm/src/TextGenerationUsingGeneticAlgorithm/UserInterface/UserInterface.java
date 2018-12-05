@@ -7,6 +7,7 @@ package TextGenerationUsingGeneticAlgorithm.UserInterface;
 
 import TextGenerationUsingGeneticAlgorithm.Population;
 import java.awt.Color;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Vaishali Tripathi
  */
 public class UserInterface extends javax.swing.JFrame {
-
+    final static Logger logger = Logger.getLogger(UserInterface.class.getName());
     /**
      * Creates new form UserInterface
      */
@@ -215,10 +216,11 @@ public class UserInterface extends javax.swing.JFrame {
             while (!(c.isFinished()) && (stopper<10000)) {
 
                 c.NaturalSelection();
-              //  c.evaluate();
+              
                 best = c.getBest();
                 generatedStringTxt.setText(c.getBest());
-                System.out.println(c.getBest());
+                logger.info(best);
+                //System.out.println(c.getBest());
                 stopper++;
 
             }
