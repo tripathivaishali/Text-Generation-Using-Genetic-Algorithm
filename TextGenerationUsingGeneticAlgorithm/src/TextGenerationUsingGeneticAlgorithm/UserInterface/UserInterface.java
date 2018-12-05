@@ -52,8 +52,6 @@ public class UserInterface extends javax.swing.JFrame {
         avgFitnessTxt = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        Donetxt = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         backGroundLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -121,7 +119,7 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
         getContentPane().add(mutationRateTxt);
-        mutationRateTxt.setBounds(160, 160, 274, 28);
+        mutationRateTxt.setBounds(160, 158, 274, 30);
 
         startBtn.setText("Start");
         startBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -170,19 +168,6 @@ public class UserInterface extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(20, 390, 190, 20);
 
-        Donetxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DonetxtActionPerformed(evt);
-            }
-        });
-        getContentPane().add(Donetxt);
-        Donetxt.setBounds(300, 480, 140, 26);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel7.setText("Completion Status:");
-        getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 490, 210, 20);
-
         backGroundLbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TextGenerationUsingGeneticAlgorithm/UserInterface/NEWIMAGE123.png"))); // NOI18N
         backGroundLbl.setText("jLabel9");
         getContentPane().add(backGroundLbl);
@@ -209,10 +194,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBtnActionPerformed
         // TODO add your handling code here:
-        avgFitnessTxt.setText("");
-        numOfGenTxt.setText("");
-        timeTxt.setText("");
-        Donetxt.setText("");
+
         try {
         if((targetStringTxt.getText()=="") || mutationRateTxt.getText()==""){
             JOptionPane.showMessageDialog(rootPane, "Target String and mutation rate cannot be empty.");
@@ -230,7 +212,7 @@ public class UserInterface extends javax.swing.JFrame {
             double time1 = System.currentTimeMillis();
             int stopper = 0;
             while (!(c.isFinished()) && (stopper<10000)) {
-
+        
                 c.NaturalSelection();
               
                 best = c.getBest();
@@ -240,14 +222,17 @@ public class UserInterface extends javax.swing.JFrame {
                 stopper++;
 
             }
+
+            
             double time2 = System.currentTimeMillis();
             System.out.println("Number of generations: " + c.getGenerations());
             numOfGenTxt.setText(String.valueOf(c.getGenerations()));
             avgFitnessTxt.setText(String.valueOf(c.getAverageFitness()));
             double t = time2 - time1;
             timeTxt.setText(String.valueOf(t) + "ms");
-            Donetxt.setText("Completed");
             System.out.println("Time Elapsed: " + t + " ms");
+            if(!generatedStringTxt.getText().equals(target))
+                JOptionPane.showMessageDialog(rootPane, "Text cannot be generated with this mutation rate.");
         } catch (NumberFormatException n) {
             if ((targetStringTxt.getText().equals("")) || mutationRateTxt.getText().equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "Target String and mutation rate cannot be empty.");
@@ -265,10 +250,10 @@ public class UserInterface extends javax.swing.JFrame {
         targetStringTxt.setText("");
         generatedStringTxt.setText("");
         mutationRateTxt.setText("");
-        avgFitnessTxt.setText("");
         numOfGenTxt.setText("");
+        avgFitnessTxt.setText("");
         timeTxt.setText("");
-        Donetxt.setText("");
+        
     }//GEN-LAST:event_targetStringTxtFocusGained
 
     private void targetStringTxtFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_targetStringTxtFocusLost
@@ -283,10 +268,6 @@ public class UserInterface extends javax.swing.JFrame {
     private void generatedStringTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generatedStringTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_generatedStringTxtActionPerformed
-
-    private void DonetxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DonetxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DonetxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -326,7 +307,6 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Donetxt;
     private javax.swing.JTextField avgFitnessTxt;
     private javax.swing.JLabel backGroundLbl;
     private java.awt.TextField generatedStringTxt;
@@ -337,7 +317,6 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField mutationRateTxt;
     private javax.swing.JTextField numOfGenTxt;
