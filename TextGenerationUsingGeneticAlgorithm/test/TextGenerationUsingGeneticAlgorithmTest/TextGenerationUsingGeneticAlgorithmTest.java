@@ -34,48 +34,36 @@ public class TextGenerationUsingGeneticAlgorithmTest {
     @Test
     public void testGenerateChromosome() {
         System.out.println("generateChromosome");
-        int chromozomeLength = 1;
-        Chromosome instance = new Chromosome(" ");
+        int chromozomeLength = 6;
+        Chromosome instance = new Chromosome("target");
         instance.generateChromosome(chromozomeLength);
+        assertEquals(chromozomeLength, instance.getCandidateString().length());
     }
 
     /**
      * Test of calculateFitness method, of class Chromosome.
      */
     @Test
-    public void testCalculateFitness() {
-        System.out.println("calculateFitness");
-        String candidateString = " ";
-        Chromosome instance = new Chromosome(candidateString);
-        double expResult = 1.01;
-        double result = instance.calculateFitness(candidateString);
-        assertEquals(expResult, result, 1.01);
+   public void testCalculateFitness() {
+       System.out.println("calculateFitness");
+       String candidateString = " ";
+       Chromosome instance = new Chromosome(candidateString);
+       double expResult = 1.01;
+       double result = instance.calculateFitness(instance.getCandidateString());
+       if(expResult>=result)
+       assertEquals(expResult, result,1.01);
+       else
+           fail("Not passed");
+   }
 
-    }
-
-    /**
-     * Test of compareTo method, of class Chromosome.
-     */
-    @Test
-    public void testCompareTo() {
-        System.out.println("compareTo");
-        String candidate = " ";
-        String nxtcandidate = ";";
-        Chromosome c = new Chromosome(candidate);
-        Chromosome instance = new Chromosome(nxtcandidate);
-        int expResult = 0;
-        int result = (instance.compareTo(c));
-        assertEquals(expResult, result);
-
-    }
 
     @Test
     public void testGenerateGene() {
         System.out.println("generateGene");
         Gene instance = new Gene();
         char expResult = ' ';
-        Set<Character> a = new HashSet<>(Arrays.asList(',', '.', '!', '-', '{', '}', '&', '*', ';', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-                'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
+        Set<Character> a = new HashSet<>(Arrays.asList(',',':', '.', '!', '-', '{', '}', '&', '*', ';', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+                'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'));
         char result = instance.generateGene();
         // assertEquals(expResult, result);
 
