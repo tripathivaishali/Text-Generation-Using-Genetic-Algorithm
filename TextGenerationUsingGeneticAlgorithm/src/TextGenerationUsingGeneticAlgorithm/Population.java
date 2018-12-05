@@ -38,7 +38,7 @@ public class Population<X extends Comparable<Chromosome>> {
         this.populationSize = populationSize;
         this.target = target;
         this.mutationRate = mutationRate;
-        createPopulation();
+        createPopulation(generation);
     }
 
     public void createPopulation(ArrayList<Chromosome> generation) {
@@ -48,13 +48,7 @@ public class Population<X extends Comparable<Chromosome>> {
         Collections.sort(generation);
     }
 
-    public void createPopulation() {
-        while (!(generation.size() == populationSize)) {
-            generation.add(new Chromosome(target));
-        }
-        Collections.sort(generation);
-    }
-
+    
     public void NaturalSelection() {
         generationCount++;
         matingPool.clear();
