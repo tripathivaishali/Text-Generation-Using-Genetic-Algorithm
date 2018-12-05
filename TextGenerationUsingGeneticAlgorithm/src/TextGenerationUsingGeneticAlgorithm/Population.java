@@ -49,6 +49,7 @@ public class Population<X extends Comparable<Chromosome>> {
     }
 
     
+
     public void NaturalSelection() {
         generationCount++;
         matingPool.clear();
@@ -67,8 +68,9 @@ public class Population<X extends Comparable<Chromosome>> {
             Chromosome child = crossover(partnerA, partnerB, target);
             mutate(child, mutationRate);
             generation.set(generation.size() - (j + 1), child);
-
+            
         }
+        evaluate(generation);
     }
 
     public Chromosome crossover(Chromosome partnerA, Chromosome partnerB, String target) {
@@ -105,7 +107,7 @@ public class Population<X extends Comparable<Chromosome>> {
         child.setCandidateString(String.valueOf(childChars));
     }
 
-    public void evaluate() {
+    public double evaluate(ArrayList<Chromosome> generation) {
         double worldrecord = 0.0;
         int index = 0;
         for (int i = 0; i < generation.size(); i++) {
@@ -120,6 +122,7 @@ public class Population<X extends Comparable<Chromosome>> {
         }
         best = new Chromosome(target);
         best.setCandidateString(generation.get(index).getCandidateString());
+    return worldrecord;
     }
 
     public boolean isFinished() {

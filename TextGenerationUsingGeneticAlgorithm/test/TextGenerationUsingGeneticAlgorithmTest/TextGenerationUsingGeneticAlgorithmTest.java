@@ -37,6 +37,7 @@ public class TextGenerationUsingGeneticAlgorithmTest {
         int chromozomeLength = 1;
         Chromosome instance = new Chromosome(" ");
         instance.generateChromosome(chromozomeLength);
+        
     }
 
     /**
@@ -48,34 +49,21 @@ public class TextGenerationUsingGeneticAlgorithmTest {
         String candidateString = " ";
         Chromosome instance = new Chromosome(candidateString);
         double expResult = 1.01;
-        double result = instance.calculateFitness(candidateString);
-        assertEquals(expResult, result, 1.01);
-
+        double result = instance.calculateFitness(instance.getCandidateString());
+        if(expResult>=result)
+        assertEquals(expResult, result,1.01);
+        else
+            fail("No passed");
     }
 
-    /**
-     * Test of compareTo method, of class Chromosome.
-     */
-    @Test
-    public void testCompareTo() {
-        System.out.println("compareTo");
-        String candidate = " ";
-        String nxtcandidate = ";";
-        Chromosome c = new Chromosome(candidate);
-        Chromosome instance = new Chromosome(nxtcandidate);
-        int expResult = 0;
-        int result = (instance.compareTo(c));
-        assertEquals(expResult, result);
-
-    }
 
     @Test
     public void testGenerateGene() {
         System.out.println("generateGene");
         Gene instance = new Gene();
         char expResult = ' ';
-        Set<Character> a = new HashSet<>(Arrays.asList(',', '.', '!', '-', '{', '}', '&', '*', ';', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-                'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'));
+        Set<Character> a = new HashSet<>(Arrays.asList(',',':', '.', '!', '-', '{', '}', '&', '*', ';', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+               'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'));
         char result = instance.generateGene();
         // assertEquals(expResult, result);
 
@@ -149,11 +137,41 @@ public class TextGenerationUsingGeneticAlgorithmTest {
 
     }
 
+     @Test
+     public void testevaluate()
+     {
+          System.out.println("evaluate");
+        int populationSize = 10;
+        String target = "a";
+        float mutationRate = (float) 0.01;
+        
+        Chromosome c = new Chromosome();
+        c.setCandidateString(target);
+      
+        ArrayList<Chromosome> list = new ArrayList<>();
+        list.add(c);
+        Population instance = new Population(populationSize, target, mutationRate);
+        
+        double r = instance.evaluate(list);
+        assertEquals(c.getFitness(), r,0.01);
+
+     }
     @Test
     public void testIsFinished() {
         System.out.println("isFinished");
-        Population instance = new Population();
-        boolean expResult = false;
+        int populationSize = 10;
+        String target = "a";
+        float mutationRate = (float) 0.01;
+        double perfectscore = 1.01;
+        Chromosome c = new Chromosome();
+        c.setCandidateString(target);
+        c.setFitness(perfectscore);
+        ArrayList<Chromosome> list = new ArrayList<>();
+        list.add(c);
+        Population instance = new Population(populationSize, target, mutationRate);
+        
+        double r = instance.evaluate(list);
+        boolean expResult = true;
         boolean result = instance.isFinished();
         assertEquals(expResult, result);
 
