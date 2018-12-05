@@ -27,7 +27,10 @@ public class Chromosome implements Comparable<Chromosome> {
     public Chromosome() {
 
     }
-
+/*******************************************************************************
+    The accepts the target string as an argument and calls generateChromosome() 
+    with chromosome length as argument which is equal to the length of the target string.
+    *****************************************************************************/
     public Chromosome(String target) {
 
         this.target = target;
@@ -41,7 +44,10 @@ public class Chromosome implements Comparable<Chromosome> {
         int maxRange = chromozomeLength;
         return (r.nextInt((maxRange - minRange) + 1) + minRange);
     }
-
+/*******************************************************************************
+    generateChromosome() accepts the chromosome length as argument and adds genes
+    through generateWord() in a loop till the chromosome length is not reached.
+    *****************************************************************************/
     public void generateChromosome(int chromozomeLength) {
         int minRange = 1;
         int maxRange = chromozomeLength;
@@ -62,7 +68,11 @@ public class Chromosome implements Comparable<Chromosome> {
         String randomWord = String.valueOf(randomChars);
         return randomWord;
     }
-
+/*******************************************************************************
+    calculateFitness() accepts a candidate string(or chromosome's string value)
+    and calculate the fitness by comparing its genes with each character of the 
+    target string.
+    *****************************************************************************/
     public double calculateFitness(String candidateString) {
         double score = 0;
         for (int i = 0; i < candidateString.length(); i++) {

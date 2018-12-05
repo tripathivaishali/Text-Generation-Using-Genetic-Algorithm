@@ -16,9 +16,6 @@ import javax.swing.JOptionPane;
  */
 public class UserInterface extends javax.swing.JFrame {
     final static Logger logger = Logger.getLogger(UserInterface.class.getName());
-    /**
-     * Creates new form UserInterface
-     */
     String best;
 
     public UserInterface() {
@@ -196,6 +193,10 @@ public class UserInterface extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         try {
+            
+    /*******************************************************************************
+     * Validation for blank inputs
+    *****************************************************************************/
         if((targetStringTxt.getText()=="") || mutationRateTxt.getText()==""){
             JOptionPane.showMessageDialog(rootPane, "Target String and mutation rate cannot be empty.");
             return;
@@ -203,37 +204,67 @@ public class UserInterface extends javax.swing.JFrame {
 
             int populationSize = 10000;
             float mutationRate = (float) 0.01;
+            /*********************************
+                Default string
+            **********************************/
             String target = "Program Structures & Algorithms..!!";
 
             mutationRate = Float.valueOf(mutationRateTxt.getText());
             target = targetStringTxt.getText();
 
+            /********************************************************************
+                Creating the first population
+            *********************************************************************/
             Population c = new Population(populationSize, target, mutationRate);
             double time1 = System.currentTimeMillis();
+            
+            /********************************************************************
+            Stopper stops the program execution if the number of generations 
+            reach 10,000
+            *********************************************************************/
             int stopper = 0;
             while (!(c.isFinished()) && (stopper<10000)) {
-        
+            /********************************************************************
+            Natural selection
+            *********************************************************************/
                 c.NaturalSelection();
-              
+            /********************************************************************
+            Get the best chromosome
+            *********************************************************************/
                 best = c.getBest();
                 generatedStringTxt.setText(c.getBest());
+            /********************************************************************
+            Logger: Apache log4j has been used here
+            *********************************************************************/
                 logger.info(best);
-                //System.out.println(c.getBest());
                 stopper++;
 
-            }
-
-            
+            } 
             double time2 = System.currentTimeMillis();
+            
             System.out.println("Number of generations: " + c.getGenerations());
+            
             numOfGenTxt.setText(String.valueOf(c.getGenerations()));
             avgFitnessTxt.setText(String.valueOf(c.getAverageFitness()));
+            
+            /********************************************************************
+            Benchmarking
+            *********************************************************************/
             double t = time2 - time1;
             timeTxt.setText(String.valueOf(t) + "ms");
             System.out.println("Time Elapsed: " + t + " ms");
+            
+            /********************************************************************
+                In case the generated string doesn't match the entered string,
+                allow the user to try a different mutation rate
+            *********************************************************************/
             if(!generatedStringTxt.getText().equals(target))
                 JOptionPane.showMessageDialog(rootPane, "Text cannot be generated with this mutation rate.");
-        } catch (NumberFormatException n) {
+        }
+            /********************************************************************
+            Exception handling
+            *********************************************************************/
+        catch (NumberFormatException n) {
             if ((targetStringTxt.getText().equals("")) || mutationRateTxt.getText().equals("")) {
                 JOptionPane.showMessageDialog(rootPane, "Target String and mutation rate cannot be empty.");
             } else if ((targetStringTxt.getText().length() == 1)) {
@@ -246,7 +277,9 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_startBtnActionPerformed
 
     private void targetStringTxtFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_targetStringTxtFocusGained
-        // TODO add your handling code here:
+        /********************************************************************
+            User interface configuration
+            *********************************************************************/
         targetStringTxt.setText("");
         generatedStringTxt.setText("");
         mutationRateTxt.setText("");

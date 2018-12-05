@@ -14,9 +14,12 @@ import java.util.Random;
 public class Gene {
     
     Random r = new Random();
-   
+   /*******************************************************************************
+    generateGene() generates random characters. The characters may be lowercase 
+    letters, uppercase letters, punctuation, spaces or numbers.
+    *****************************************************************************/
     public char generateGene(){
-        char[] punctuations = new char []{',', '.','!','-','{','}','&','*',';',':'};
+        char[] punctuation = new char []{',', '.','!','-','{','}','&','*',';',':'};
         char[] numbers = new char[]{'1','2','3','4','5','6','7','8','9','0'};
         char[] space = new char[]{' '};
         
@@ -25,7 +28,7 @@ public class Gene {
                return (char)(r.nextInt(26) + 'a');
             else
                 if (r.nextBoolean())
-                return punctuations[r.nextInt(punctuations.length)];
+                return punctuation[r.nextInt(punctuation.length)];
                 else 
                 return (char) (r.nextInt(26) + 'A');
         else 

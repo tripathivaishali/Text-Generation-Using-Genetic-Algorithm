@@ -6,12 +6,8 @@
 package TextGenerationUsingGeneticAlgorithm;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import static java.util.Collections.sort;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 /**
  *
@@ -33,7 +29,11 @@ public class Population<X extends Comparable<Chromosome>> {
 
     public Population() {
     }
-
+/*******************************************************************************
+    When instance of this class is created, a population of chromosomes equal to 
+    the passed population size will be created using createPopulation(). The 
+    chromosome size will be decided based on the target string passed.
+    *****************************************************************************/
     public Population(int populationSize, String target, float mutationRate) {
         this.populationSize = populationSize;
         this.target = target;
@@ -48,7 +48,19 @@ public class Population<X extends Comparable<Chromosome>> {
         Collections.sort(generation);
     }
 
-    
+/*******************************************************************************
+    The purpose of NaturalSelection() is to create a mating pool that will 
+    consist of the fittest 80% population of the generation, pick 2 partners
+    from the pool at random and product an offspring.
+    This is done using below steps:
+    1. clear the mating pool
+    2. (The population in the 1st generation is already sorted according to the 
+    chromosome fitness in descending order). Population size*0.8 number of chromosomes
+    from the top are added in the mating pool.
+    3. Two random partners are selected and passed to crossover()
+    4. the offspring so created is then passed to mutate()
+    5. Replaces the least fir 20% generation with the new children.
+    *****************************************************************************/ 
 
     public void NaturalSelection() {
         generationCount++;
@@ -72,6 +84,15 @@ public class Population<X extends Comparable<Chromosome>> {
         }
         evaluate(generation);
     }
+    
+    /*******************************************************************************
+    crossover() accepts 2 partner chromosomes, selects a random index and creates a 
+    new child by merging the two partners. For example,
+    PartnerA = "mobiles"
+    PartnerB = "popcorn"
+    random index = 4
+    So child = mobi(from partnerA) + orn(from partnerB) = mobiorn
+    *****************************************************************************/
 
     public Chromosome crossover(Chromosome partnerA, Chromosome partnerB, String target) {
         Chromosome child = new Chromosome(target);
@@ -91,6 +112,12 @@ public class Population<X extends Comparable<Chromosome>> {
         return child;
     }
 
+    /*******************************************************************************
+    mutate() is fed with a chromosome and a mutation rate. A number between 0.0 to 1
+    is generated at random and compared with the entered mutation rate. If the number is
+    less than the mutation rate, a random gene of the entered chromosome is 
+    mutated (or replaced) with a randomly generated new gene.
+    *****************************************************************************/
     public void mutate(Chromosome child, double mutationRate) {
         double rangeMin = 0.0f;
         double rangeMax = 1.0f;
@@ -106,7 +133,10 @@ public class Population<X extends Comparable<Chromosome>> {
         }
         child.setCandidateString(String.valueOf(childChars));
     }
-
+/*******************************************************************************
+    evaluate() returns the best chromosome from a given generation by identifying
+    the highest value of fitness and the chromosome with that fitness
+    *****************************************************************************/
     public double evaluate(ArrayList<Chromosome> generation) {
         double worldrecord = 0.0;
         int index = 0;
